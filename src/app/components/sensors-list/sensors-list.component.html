@@ -1,29 +1,30 @@
 <mat-form-field>
-    <mat-label>Filter</mat-label>
-    <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium" #input>
-  </mat-form-field>
-  
-  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-  
-    <!-- ID Column -->
-    <ng-container matColumnDef="id">
-      <th mat-header-cell *matHeaderCellDef> No. </th>
-      <td mat-cell *matCellDef="let element"> {{element.id}} </td>
-    </ng-container>
-  
- 
-    <!-- Moisture Column -->
-    <ng-container matColumnDef="moisture">
-      <th mat-header-cell *matHeaderCellDef> Moisture </th>
-      <td mat-cell *matCellDef="let element"> {{element.moisture}} </td>
-    </ng-container>
-  
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-  
-    <!-- Row shown when there is no matching data. -->
-    <tr class="mat-row" *matNoDataRow>
-      <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
-    </tr>
-  </table>
-  
+  <mat-label>Filter</mat-label>
+  <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium" #input />
+</mat-form-field>
+
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+  <!-- ID Column -->
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef>No.</th>
+    <td mat-cell *matCellDef="let element">{{ element.sensor_id }}</td>
+  </ng-container>
+
+  <!-- Moisture Column -->
+  <ng-container matColumnDef="moisture">
+    <th mat-header-cell *matHeaderCellDef>Moisture Limit</th>
+    <td mat-cell *matCellDef="let element">
+      {{ element.moisture_rate_limit }}
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+
+  <!-- Row shown when there is no matching data. -->
+  <tr class="mat-row" *matNoDataRow>
+    <td class="mat-cell" colspan="4">
+      No data matching the filter "{{ input.value }}"
+    </td>
+  </tr>
+</table>
