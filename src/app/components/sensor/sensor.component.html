@@ -1,9 +1,10 @@
 <mat-form-field>
   <mat-label>Sensor ID</mat-label>
-  <input matInput [(ngModel)]="sensor.sensor_id" disabled>
+  <input matInput [(ngModel)]="sensor.sensor_id" disabled />
 </mat-form-field>
 
 <mat-form-field>
   <mat-label>Moisture</mat-label>
-  <input matInput [(ngModel)]="sensor.moisture_rate_limit">
+  <input matInput [(ngModel)]="sensor.moisture_rate_limit" />
 </mat-form-field>
+<app-messages-list [sensorId]="'1'"></app-messages-list>

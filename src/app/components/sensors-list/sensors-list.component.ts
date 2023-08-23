@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MatTableDataSource, MatTableModule } from '@angular/material/table';
-import { MatInputModule } from '@angular/material/input';
-import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatTableDataSource } from '@angular/material/table';
 import { SensorsService } from 'src/app/services/sensors.service';
 import { Sensor } from 'src/app/models/sensor.model';
 
@@ -9,8 +7,6 @@ import { Sensor } from 'src/app/models/sensor.model';
   selector: 'app-sensors-list',
   templateUrl: './sensors-list.component.html',
   styleUrls: ['./sensors-list.component.css'],
-  standalone: true,
-  imports: [MatFormFieldModule, MatInputModule, MatTableModule],
 })
 export class SensorsListComponent implements OnInit {
   sensors: Sensor[] = [];
