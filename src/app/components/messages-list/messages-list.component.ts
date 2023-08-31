@@ -9,20 +9,22 @@ import { MessagesService } from 'src/app/services/messages.service';
   styleUrls: ['./messages-list.component.css'],
 })
 export class MessagesListComponent implements OnInit {
-  @Input() sensorId!: string;
+  @Input() sensorId!: string | null;
   messages: Message[] = [];
 
-  displayedColumns: string[] = ['id', 'sensor_id', 'moisture'];
+  displayedColumns: string[] = ['id', 'sensor_id', 'moisture', 'alert', 'date'];
   dataSource = new MatTableDataSource();
 
   constructor(private messagesService: MessagesService) {}
 
   ngOnInit(): void {
-    this.getMessages();
+    if (this.sensorId) this.getMessages(this.sensorId);
   }
 
-  getMessages(): void {
-    this.messagesService.getMessages(this.sensorId).subscribe((data) => {
+  getMessages(sensorId: string): void {
+    console.log('sensorId', this.sensorId);
+    this.messagesService.getMessages(sensorId).subscribe((data) => {
+      console.log('responseMessages', data);
       this.messages = data.messages;
       // Update the dataSource with the new sensor data
       this.dataSource.data = this.messages;

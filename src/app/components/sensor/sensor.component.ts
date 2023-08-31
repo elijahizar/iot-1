@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Sensor, SensorData } from 'src/app/models/sensor.model';
 import { SensorsService } from 'src/app/services/sensors.service';
 
@@ -8,28 +9,83 @@ import { SensorsService } from 'src/app/services/sensors.service';
   templateUrl: './sensor.component.html',
   styleUrls: ['./sensor.component.css'],
 })
-export class SensorComponent {
+export class SensorComponent implements OnInit {
+  sensorForm: FormGroup;
   routeName: string = '';
-  sensor: Sensor = { sensor_id: '', moisture_rate_limit: '' }; // Initialize with default values
+  sensor: Sensor = { sensorId: '', moistureRateLimit: '' }; // Initialize with default values
+  selectedSensorId: string | null = '';
+  createOrUpdate: string = 'none';
 
   constructor(
+    private fb: FormBuilder,
+    private router: Router,
     private aRouter: ActivatedRoute,
     private sensorsService: SensorsService
-  ) {}
-
-  ngOnInit(): void {
-    const selectedSensorId = Number(this.aRouter.snapshot.paramMap.get('id'));
-    this.aRouter.url.subscribe((url) => {
-      this.routeName = url[0].path;
+  ) {
+    this.sensorForm = this.fb.group({
+      sensorId: ['', Validators.required],
+      moistureRateLimit: ['', Validators.required],
     });
 
-    this.getSensor(selectedSensorId);
+    this.aRouter.snapshot.paramMap.get('id') == 'create'
+      ? (this.routeName = 'create')
+      : (this.selectedSensorId = this.aRouter.snapshot.paramMap.get('id'));
   }
 
-  getSensor(id: number): void {
+  ngOnInit(): void {
+    if (this.selectedSensorId) this.getSensor(this.selectedSensorId);
+    console.log('selectedSensorId', this.selectedSensorId);
+  }
+
+  onSubmit(event: Event) {
+    event.preventDefault();
+    const sensor: Sensor = {
+      sensorId: this.sensorForm.value.sensorId || '0',
+      moistureRateLimit: this.sensorForm.value.moistureRateLimit,
+    };
+    console.log('onsubmit', sensor);
+    if (this.createOrUpdate === 'create') {
+      this.sensorsService.createSensor(sensor).subscribe((response) => {
+        this.router.navigate([`/`]);
+      });
+    } else if (this.createOrUpdate === 'update') {
+      // get sensor id from somewhere
+      this.sensorsService.updateSensor(sensor).subscribe((response) => {
+        this.router.navigate([`/sensor/${this.selectedSensorId}`]);
+      });
+    }
+  }
+
+  createSensor(): void {
+    const sensor: Sensor = {
+      sensorId: '0',
+      moistureRateLimit: this.sensor.moistureRateLimit,
+    };
+
+    console.log('createsensor()', sensor);
+
+    this.sensorsService.createSensor(sensor).subscribe({
+      next: (v) => {
+        console.log(`sensor ${sensor} enregistré avec succès`);
+        this.router.navigate(['/']);
+      },
+    });
+  }
+
+  getSensor(id: string): void {
     this.sensorsService.getSensor(id).subscribe((data) => {
       console.log('data', data);
       this.sensor = new Sensor(data);
+      this.sensorForm.patchValue({
+        sensorId: this.sensor.sensorId,
+        moistureRateLimit: this.sensor.moistureRateLimit,
+      });
+    });
+  }
+
+  deleteSensor(id: string) {
+    this.sensorsService.deleteSensor(id).subscribe((data: string) => {
+      this.router.navigate(['/tickets']);
     });
   }
 }

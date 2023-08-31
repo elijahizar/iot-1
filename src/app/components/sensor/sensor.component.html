@@ -1,10 +1,67 @@
-<mat-form-field>
-  <mat-label>Sensor ID</mat-label>
-  <input matInput [(ngModel)]="sensor.sensor_id" disabled />
-</mat-form-field>
+<div class="wrapper">
+  <div class="body">
+    <h2>Sensor {{ selectedSensorId ? selectedSensorId : "" }}</h2>
+    <form [formGroup]="sensorForm" (ngSubmit)="onSubmit($event)">
+      <mat-form-field>
+        <mat-label>Sensor ID</mat-label>
+        <input
+          matInput
+          type="text"
+          formControlName="sensorId"
+          class="form-control"
+          placeholder="ID"
+        />
+      </mat-form-field>
 
-<mat-form-field>
-  <mat-label>Moisture</mat-label>
-  <input matInput [(ngModel)]="sensor.moisture_rate_limit" />
-</mat-form-field>
-<app-messages-list [sensorId]="'1'"></app-messages-list>
+      <mat-form-field>
+        <mat-label>Limite Humidité</mat-label>
+        <input
+          matInput
+          type="text"
+          formControlName="moistureRateLimit"
+          class="form-control"
+          placeholder="Humidité Minimale"
+        />
+      </mat-form-field>
+
+      <div class="buttons">
+        <button
+          *ngIf="routeName == 'create'"
+          type="submit"
+          id="createSensor"
+          mat-button
+          color="primary"
+          (click)="createOrUpdate = 'create'"
+          [disabled]="!sensorForm.valid"
+        >
+          Créer
+        </button>
+        <button
+          *ngIf="selectedSensorId"
+          type="submit"
+          id="updateSensor"
+          mat-button
+          color="primary"
+          (click)="createOrUpdate = 'update'"
+          [disabled]="!sensorForm.valid"
+        >
+          Sauvegarder
+        </button>
+        <button
+          *ngIf="selectedSensorId"
+          type="button"
+          id="supprimerSensor"
+          mat-button
+          color="warn"
+          (click)="deleteSensor(selectedSensorId)"
+        >
+          Supprimer
+        </button>
+      </div>
+
+      <app-messages-list [sensorId]="selectedSensorId"></app-messages-list>
+    </form>
+
+    <a routerLink="/">Retourner</a>
+  </div>
+</div>

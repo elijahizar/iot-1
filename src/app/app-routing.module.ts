@@ -7,6 +7,7 @@ import { SensorsListComponent } from './components/sensors-list/sensors-list.com
 const routes: Routes = [
   { path: '', component: SensorsListComponent },
   { path: 'sensor/:id', component: SensorComponent },
+  { path: 'sensor/create', component: SensorComponent },
   { path: 'messages', component: MessagesListComponent },
 ];
 

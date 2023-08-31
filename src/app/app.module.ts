@@ -11,9 +11,10 @@ import { SensorComponent } from './components/sensor/sensor.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MessagesListComponent } from './components/messages-list/messages-list.component';
 import { MatTableModule } from '@angular/material/table';
+import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,8 @@ import { MatTableModule } from '@angular/material/table';
     MatSelectModule,
     FormsModule,
     MatTableModule,
+    ReactiveFormsModule,
+    MatButtonModule,
   ],
   providers: [SensorsService],
   bootstrap: [AppComponent],
