@@ -19,6 +19,8 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { DatePipe } from '@angular/common';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
+import { NgChartsModule } from 'ng2-charts';
+import { LineChartComponent } from './components/line-chart/line-chart.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +28,7 @@ import { MatSortModule } from '@angular/material/sort';
     SensorComponent,
     MessagesListComponent,
     SensorsListComponent,
+    LineChartComponent,
   ],
   imports: [
     BrowserModule,
@@ -42,6 +45,7 @@ import { MatSortModule } from '@angular/material/sort';
     MatButtonModule,
     MatPaginatorModule,
     MatSortModule,
+    NgChartsModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
       // Register the ServiceWorker as soon as the app is stable
       // or after 30 seconds (whichever comes first).
