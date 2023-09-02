@@ -2,64 +2,69 @@
   <div class="body">
     <h2>Capteur {{ selectedSensorId ? selectedSensorId : "" }}</h2>
     <form [formGroup]="sensorForm" (ngSubmit)="onSubmit($event)">
-      <div class="buttons">
-        <mat-form-field>
-          <mat-label>ID Capteur</mat-label>
-          <input
-            matInput
-            type="text"
-            formControlName="sensorId"
-            class="form-control"
-            placeholder="ID"
-          />
-        </mat-form-field>
+      <div class="form">
+        <div class="fields">
+          <mat-form-field>
+            <mat-label>ID Capteur</mat-label>
+            <input
+              matInput
+              type="text"
+              formControlName="sensorId"
+              class="form-control"
+              placeholder="ID"
+            />
+          </mat-form-field>
 
-        <mat-form-field>
-          <mat-label>Seuil d'humidité</mat-label>
-          <input
-            matInput
-            type="text"
-            formControlName="moistureRateLimit"
-            class="form-control"
-            placeholder="Humidité Minimale"
-          />
-        </mat-form-field>
-
-        <button
-          *ngIf="routeName == 'create'"
-          type="submit"
-          id="createSensor"
-          mat-button
-          color="primary"
-          (click)="createOrUpdate = 'create'"
-          [disabled]="!sensorForm.valid"
-        >
-          Créer
-        </button>
-        <button
-          *ngIf="selectedSensorId"
-          type="submit"
-          id="updateSensor"
-          mat-button
-          color="primary"
-          (click)="createOrUpdate = 'update'"
-          [disabled]="!sensorForm.valid"
-        >
-          Sauvegarder
-        </button>
-        <button
-          *ngIf="selectedSensorId"
-          type="button"
-          id="supprimerSensor"
-          mat-button
-          color="warn"
-          (click)="deleteSensor(selectedSensorId)"
-        >
-          Supprimer
-        </button>
+          <mat-form-field>
+            <mat-label>Seuil d'humidité</mat-label>
+            <input
+              matInput
+              type="text"
+              formControlName="moistureRateLimit"
+              class="form-control"
+              placeholder="Humidité Minimale"
+            />
+          </mat-form-field>
+        </div>
+        <div class="buttons">
+          <button
+            *ngIf="routeName == 'create'"
+            type="submit"
+            id="createSensor"
+            mat-button
+            (click)="createOrUpdate = 'create'"
+            [disabled]="!sensorForm.valid"
+          >
+            Créer
+          </button>
+          <button
+            *ngIf="selectedSensorId"
+            type="submit"
+            id="updateSensor"
+            mat-button
+            color="primary"
+            (click)="createOrUpdate = 'update'"
+            [disabled]="!sensorForm.valid"
+          >
+            Sauvegarder
+          </button>
+          <button
+            *ngIf="selectedSensorId"
+            type="button"
+            id="supprimerSensor"
+            mat-button
+            color="warn"
+            (click)="deleteSensor(selectedSensorId)"
+          >
+            Supprimer
+          </button>
+        </div>
       </div>
 
-      <app-messages-list [sensorId]="selectedSensorId"></app-messages-list>
+      <app-messages-list
+        *ngIf="selectedSensorId"
+        [sensorId]="selectedSensorId"
+      ></app-messages-list>
     </form>
 
     <a routerLink="/"><button mat-button><< Rétourner</button> </a>

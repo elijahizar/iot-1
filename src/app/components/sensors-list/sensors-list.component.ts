@@ -12,7 +12,13 @@ import { DatePipe } from '@angular/common';
 export class SensorsListComponent implements OnInit {
   sensors: Sensor[] = [];
 
-  displayedColumns: string[] = ['id', 'moistureLimit', 'lastMoisture', 'alert'];
+  displayedColumns: string[] = [
+    'id',
+    'moistureLimit',
+    'lastMoisture',
+    'alert',
+    'lastUpdate',
+  ];
   dataSource = new MatTableDataSource();
 
   constructor(private sensorService: SensorsService) {}

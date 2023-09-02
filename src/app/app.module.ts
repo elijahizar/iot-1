@@ -17,6 +17,8 @@ import { MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { DatePipe } from '@angular/common';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
 
 @NgModule({
   declarations: [
@@ -38,6 +40,8 @@ import { DatePipe } from '@angular/common';
     MatTableModule,
     ReactiveFormsModule,
     MatButtonModule,
+    MatPaginatorModule,
+    MatSortModule,
     ServiceWorkerModule.register('ngsw-worker.js', {
       // Register the ServiceWorker as soon as the app is stable
       // or after 30 seconds (whichever comes first).
