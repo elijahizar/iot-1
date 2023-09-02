@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { SensorsService } from 'src/app/services/sensors.service';
 import { Sensor } from 'src/app/models/sensor.model';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-sensors-list',
@@ -11,7 +12,7 @@ import { Sensor } from 'src/app/models/sensor.model';
 export class SensorsListComponent implements OnInit {
   sensors: Sensor[] = [];
 
-  displayedColumns: string[] = ['id', 'moisture'];
+  displayedColumns: string[] = ['id', 'moistureLimit', 'lastMoisture', 'alert'];
   dataSource = new MatTableDataSource();
 
   constructor(private sensorService: SensorsService) {}
