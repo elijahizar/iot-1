@@ -85,7 +85,7 @@ export class SensorComponent implements OnInit {
 
   deleteSensor(id: string) {
     this.sensorsService.deleteSensor(id).subscribe((data: string) => {
-      this.router.navigate(['/tickets']);
+      this.router.navigate(['/']);
     });
   }
 }

@@ -94,10 +94,13 @@ export class SensorsService {
   }
 
   /** DELETE a sensor from the backend */
-  deleteSensor(id: string): Observable<any> {
-    console.log('sending id to delete', id);
-    const url = `${this.apiUrl}/sensors/${id}`;
-    return this.http.delete<Sensor>(url, this.httpOptions).pipe(
+  deleteSensor(sensorId: string): Observable<any> {
+    const url = `${this.apiUrl}/delete`;
+    const data = {
+      sensor_id: sensorId,
+    };
+    console.log('url', url, 'data', data);
+    return this.http.post(url, data, this.httpOptions).pipe(
       tap(() => console.log('Deleted sensor')),
       catchError(this.handleError<Sensor>('deleteSensor'))
     );
