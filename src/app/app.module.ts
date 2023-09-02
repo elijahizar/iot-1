@@ -20,7 +20,6 @@ import { DatePipe } from '@angular/common';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { NgChartsModule } from 'ng2-charts';
-import { LineChartComponent } from './components/line-chart/line-chart.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +27,6 @@ import { LineChartComponent } from './components/line-chart/line-chart.component
     SensorComponent,
     MessagesListComponent,
     SensorsListComponent,
-    LineChartComponent,
   ],
   imports: [
     BrowserModule,
