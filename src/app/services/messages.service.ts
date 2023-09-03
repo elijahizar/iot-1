@@ -20,13 +20,11 @@ export class MessagesService {
     messages: Message[];
   }> {
     let params = new HttpParams().set('id', sensorId.toString());
-    console.log('params', params);
     return this.http.get<any>(this.apiUrl, { params }).pipe(
       map((response) => {
         let messages = response.Items.map((messages: MessageData) => {
           return new Message(messages);
         });
-        console.log(messages);
         return {
           messages: messages,
         };

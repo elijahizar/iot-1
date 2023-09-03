@@ -12,11 +12,11 @@ import { MessagesService } from 'src/app/services/messages.service';
 })
 export class MessagesListComponent implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @Input() sensorId!: string;
   pageSizeOptions: number[] = [10, 25, 50]; // Define the page size options
   pageSize = 10; // Initial page size
   pageIndex = 0; // Initial page index
-  @Input() sensorId!: string | null;
-  messages: Message[] = [];
+  messages!: Message[];
 
   displayedColumns: string[] = ['id', 'sensor_id', 'moisture', 'alert', 'date'];
   dataSource = new MatTableDataSource();
@@ -24,7 +24,12 @@ export class MessagesListComponent implements OnInit, AfterViewInit {
   constructor(private messagesService: MessagesService) {}
 
   ngOnInit(): void {
-    if (this.sensorId) this.getMessages(this.sensorId);
+    if (this.sensorId) {
+      this.getMessages(this.sensorId);
+      setInterval(() => {
+        this.getMessages(this.sensorId);
+      }, 45000);
+    }
     this.dataSource.paginator = this.paginator;
   }
 
@@ -37,9 +42,7 @@ export class MessagesListComponent implements OnInit, AfterViewInit {
   }
 
   getMessages(sensorId: string): void {
-    console.log('sensorId', this.sensorId);
     this.messagesService.getMessages(sensorId).subscribe((data) => {
-      console.log('responseMessages', data);
       this.messages = data.messages;
       // Update the dataSource with the new sensor data
       this.dataSource.data = this.messages;

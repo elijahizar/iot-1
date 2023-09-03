@@ -3,6 +3,10 @@
   <mat-label>Filter</mat-label>
   <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium" #input />
 </mat-form-field> -->
+<app-historique-line-chart
+  [chartData]="messages"
+  *ngIf="messages !== undefined"
+></app-historique-line-chart>
 
 <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
   <!-- ID Column -->

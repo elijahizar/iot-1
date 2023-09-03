@@ -42,11 +42,9 @@ export class SensorsService {
 
     return this.http.get<any>(this.apiUrl, { params }).pipe(
       map((response) => {
-        console.log('response', response);
         let sensors = response.Items.map((sensors: SensorData) => {
           return new Sensor(sensors);
         });
-        console.log(sensors);
         return {
           sensors: sensors,
         };
@@ -59,7 +57,6 @@ export class SensorsService {
     let params = new HttpParams().set('id', id.toString());
     return this.http.get<any>(this.apiUrl, { params }).pipe(
       map((response) => {
-        console.log('response', response);
         const sensor = response.Item;
         return sensor;
       })
@@ -73,7 +70,6 @@ export class SensorsService {
       moisture_rate_limit: sensor.moistureRateLimit,
       sensor_id: sensor.sensorId,
     };
-    console.log('data sending to api', sensor);
     return this.http
       .post<Sensor>(url, data, this.httpOptions)
       .pipe(tap(() => console.log('Created new sensor')));
@@ -86,7 +82,6 @@ export class SensorsService {
       moisture_rate_limit: sensor.moistureRateLimit,
       sensor_id: sensor.sensorId,
     };
-    console.log('trying to send update sensor to server', data);
     return this.http.post(url, data, this.httpOptions).pipe(
       tap(() => console.log('Updated sensor')),
       catchError(this.handleError<any>('updateSensor'))
@@ -99,7 +94,6 @@ export class SensorsService {
     const data = {
       sensor_id: sensorId,
     };
-    console.log('url', url, 'data', data);
     return this.http.post(url, data, this.httpOptions).pipe(
       tap(() => console.log('Deleted sensor')),
       catchError(this.handleError<Sensor>('deleteSensor'))

@@ -34,7 +34,6 @@ export class SensorComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.selectedSensorId) this.getSensor(this.selectedSensorId);
-    console.log('selectedSensorId', this.selectedSensorId);
   }
 
   onSubmit(event: Event) {
@@ -43,7 +42,6 @@ export class SensorComponent implements OnInit {
       sensorId: this.sensorForm.value.sensorId || '0',
       moistureRateLimit: this.sensorForm.value.moistureRateLimit,
     };
-    console.log('onsubmit', sensor);
     if (this.createOrUpdate === 'create') {
       this.sensorsService.createSensor(sensor).subscribe((response) => {
         this.router.navigate([`/`]);
@@ -61,12 +59,8 @@ export class SensorComponent implements OnInit {
       sensorId: '0',
       moistureRateLimit: this.sensor.moistureRateLimit,
     };
-
-    console.log('createsensor()', sensor);
-
     this.sensorsService.createSensor(sensor).subscribe({
       next: (v) => {
-        console.log(`sensor ${sensor} enregistré avec succès`);
         this.router.navigate(['/']);
       },
     });
@@ -74,7 +68,6 @@ export class SensorComponent implements OnInit {
 
   getSensor(id: string): void {
     this.sensorsService.getSensor(id).subscribe((data) => {
-      console.log('data', data);
       this.sensor = new Sensor(data);
       this.sensorForm.patchValue({
         sensorId: this.sensor.sensorId,

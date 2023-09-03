@@ -6,6 +6,7 @@ export interface MessageData {
   moisture: string;
   creation_date: Date;
   alert: string;
+  moisture_rate_limit: string;
 }
 
 export class Message {
@@ -14,6 +15,7 @@ export class Message {
   moisture: string;
   creationDate: Date;
   alert: string;
+  moistureRateLimit: string;
 
   constructor(data: MessageData) {
     this.id = data.id;
@@ -24,5 +26,6 @@ export class Message {
       'DD/MM/YYYY HH:mm:ss'
     ).toDate();
     this.alert = data.alert;
+    this.moistureRateLimit = data.moisture_rate_limit;
   }
 }

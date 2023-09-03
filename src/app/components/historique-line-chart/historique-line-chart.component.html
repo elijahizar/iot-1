@@ -1,0 +1,11 @@
+<div class="chart-container">
+  <canvas
+    *ngIf="loadChart"
+    baseChart
+    [type]="'line'"
+    [data]="lineChartData"
+    [options]="lineChartOptions"
+    [legend]="lineChartLegend"
+  >
+  </canvas>
+</div>
