@@ -1,3 +1,4 @@
+import { environment } from 'src/environments/environment';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { Sensor, SensorData } from '../models/sensor.model';
@@ -7,7 +8,7 @@ import { of } from 'rxjs/internal/observable/of';
 
 @Injectable({ providedIn: 'root' })
 export class SensorsService {
-  private apiUrl: string = process.env['API_URL'];
+  private apiUrl: string = environment.apiBaseUrl as string;
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
