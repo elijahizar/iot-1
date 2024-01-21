@@ -7,8 +7,8 @@ import { of } from 'rxjs/internal/observable/of';
 
 @Injectable({ providedIn: 'root' })
 export class SensorsService {
-  private apiUrl: string =
-    'https://gm21kwpk1b.execute-api.eu-west-3.amazonaws.com/prod/sensor';
+  private apiUrl: string = process.env['API_URL'];
+
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
   };
