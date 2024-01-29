@@ -5,7 +5,7 @@ phases:
       nodejs: 18
     commands:
       - echo "Assigning environment variables"
-      - - sed -i "s|__API_BASE_URL__|${API_URL}|g" src/environments/environment.prod.ts
+      - sed -i "s|__API_BASE_URL__|${API_URL}|g" src/environments/environment.prod.ts
       - echo "Installing dependencies..."
       - npm install
       - npm install -g @angular/cli@10.0.8
