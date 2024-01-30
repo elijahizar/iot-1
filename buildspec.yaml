@@ -5,7 +5,8 @@ phases:
       nodejs: 18
     commands:
       - echo Installing Chrome for tests
-      - apt-get -y install google-chrome-stable
+      - wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+      - dpkg -i google-chrome*.deb
       - echo "Assigning environment variables"
       - sed -i "s|__API_BASE_URL__|${API_URL}|g" src/environments/environment.prod.ts
       - echo "Installing dependencies..."
