@@ -4,7 +4,7 @@ import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { SensorsListComponent } from './components/sensors-list/sensors-list.component';
 import { SensorsService } from './services/sensors.service';
 import { SensorComponent } from './components/sensor/sensor.component';
@@ -58,7 +58,7 @@ import { HistoriqueLineChartComponent } from './components/historique-line-chart
       registrationStrategy: 'registerWhenStable:30000',
     }),
   ],
-  providers: [SensorsService, DatePipe],
+  providers: [SensorsService, DatePipe, HttpClient],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

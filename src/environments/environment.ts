@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiBaseUrl: process.env['API_URL'],
+  apiBaseUrl: 'https://d38awsb9odfzuu.cloudfront.net/prod/sensor',
 };

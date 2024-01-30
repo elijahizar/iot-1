@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Sensor, SensorData } from 'src/app/models/sensor.model';
+import { Sensor } from 'src/app/models/sensor.model';
 import { SensorsService } from 'src/app/services/sensors.service';
 
 @Component({

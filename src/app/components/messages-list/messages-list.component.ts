@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, Input, OnInit } from '@angular/core';
-import { MatTableDataSource } from '@angular/material/table';
+import { MatTable, MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { ViewChild } from '@angular/core';
 import { Message } from 'src/app/models/message.model';
@@ -11,17 +11,20 @@ import { MessagesService } from 'src/app/services/messages.service';
   styleUrls: ['./messages-list.component.css'],
 })
 export class MessagesListComponent implements OnInit, AfterViewInit {
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  dataSource: MatTableDataSource<Message> = new MatTableDataSource();
+  @ViewChild(MatPaginator) paginator: MatPaginator = <MatPaginator>{};
   @Input() sensorId!: string;
   pageSizeOptions: number[] = [10, 25, 50]; // Define the page size options
-  pageSize = 10; // Initial page size
-  pageIndex = 0; // Initial page index
+  pageSize: number; // Initial page size
+  pageIndex: number; // Initial page index
   messages!: Message[];
 
   displayedColumns: string[] = ['id', 'sensor_id', 'moisture', 'alert', 'date'];
-  dataSource = new MatTableDataSource();
 
-  constructor(private messagesService: MessagesService) {}
+  constructor(private messagesService: MessagesService) {
+    this.pageSize = 10;
+    this.pageIndex = 0;
+  }
 
   ngOnInit(): void {
     if (this.sensorId) {
@@ -30,13 +33,9 @@ export class MessagesListComponent implements OnInit, AfterViewInit {
         this.getMessages(this.sensorId);
       }, 45000);
     }
-    this.dataSource.paginator = this.paginator;
   }
 
   ngAfterViewInit(): void {
-    // Set the initial page size after the view is initialized
-    this.paginator.pageSize = this.pageSize;
-
     // Bind the paginator to the data source
     this.dataSource.paginator = this.paginator;
   }
