@@ -8,7 +8,10 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "test:ci": "ng test --no-watch --browsers=chrome_headless"
+    "test:ci": "ng test --no-watch --browsers=chrome_headless",
+    "compodoc:build": "compodoc -p tsconfig.doc.json",
+    "compodoc:build-and-serve": "compodoc -p tsconfig.doc.json -s",
+    "compodoc:serve": "compodoc -s"
   },
   "private": true,
   "dependencies": {
@@ -35,6 +38,7 @@
     "@angular-devkit/build-angular": "^16.2.1",
     "@angular/cli": "~16.2.1",
     "@angular/compiler-cli": "^16.2.3",
+    "@compodoc/compodoc": "^1.1.23",
     "@types/jasmine": "~4.3.0",
     "jasmine-core": "~4.5.0",
     "karma": "~6.4.0",
