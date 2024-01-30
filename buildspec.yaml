@@ -4,6 +4,8 @@ phases:
     runtime-versions:
       nodejs: 18
     commands:
+      - echo Installing Chrome for tests
+      - apt-get -y install google-chrome-stable
       - echo "Assigning environment variables"
       - sed -i "s|__API_BASE_URL__|${API_URL}|g" src/environments/environment.prod.ts
       - echo "Installing dependencies..."
@@ -13,6 +15,7 @@ phases:
     commands:
       - echo "Building Angular project..."
       - ng build --configuration production
+      - npm run test:ci
   post_build:
     commands:
       - echo "Updating files in the S3 bucket..."
